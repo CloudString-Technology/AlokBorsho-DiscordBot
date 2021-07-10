@@ -9,9 +9,8 @@ _G.dEnum = discord.enums --Loads all type informations here.
 
 discord.extensions() -- load all helpful extensions
 
-_G.timer = require('timer')
-_G.fs = require("fs")
 
+require("./extensions")
 
 
 client:once("ready", function() -- bot is ready
@@ -21,9 +20,12 @@ client:once("ready", function() -- bot is ready
 end)
 
 
+---@param message Message
+client:on("messageCreate", function(message)
+    local cmd, arg = parseMsg(message.content)
+end)
 
 
 
 local dToken = require("./token")
-
 client:run("Bot "..dToken)
