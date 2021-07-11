@@ -31,8 +31,8 @@ client:on("messageCreate", function(message)
     if message.author.bot then return end
     if not message.guild then return end
 
-    local cmd, arg = parseMsg(message.content)
-    if CMD[cmd] then CMD[cmd](message, arg) end
+    local cmd, content = parseMsg(message.content)
+    if CMD[cmd] then CMD[cmd](message, content) end
 
 end)
 
