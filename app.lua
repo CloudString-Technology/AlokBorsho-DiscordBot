@@ -22,6 +22,8 @@ end)
 _G.CMD = {}
 
 require("./_Commands/public") --Added public commands
+require("./_Commands/exec") --Execute Lua Code inside Discord
+
 
 ---@param message Message
 client:on("messageCreate", function(message)
