@@ -9,6 +9,7 @@ The bot script written using Lua programming language, Luvit as the runtime.
 
 [Luvit](https://luvit.io/) is an open-source, asynchronous I/O Lua runtime environment. It is a combination of LuaJIT and libuv, layered with various libraries to provide server-side functionality similar to that of Node.js, but with Lua instead of JavaScript. Luvit's companion package manager, lit, makes it easy to set up the Luvit runtime and its published libraries.
 
+You need to install luvit, you can find it, how to install it here [Install Luvit](https://luvit.io/install.html), once you done this part, copy luvit and lit executive files in the bot directory.
 
 Please rename example.token.lua to token.lua and edit before start the bot.
 
