@@ -33,9 +33,14 @@ client:on("messageCreate", function(message)
     if message.author.bot then return end
     if not message.guild then return end
 
+    --Start of Command Module.
     local cmd, content = parseMsg(message.content)
-    if CMD[cmd] then CMD[cmd](message, content) end
-
+    if not CMD[cmd] then return end
+    local suc, error = pcall(function() CMD[cmd](message, content) end)
+    if not suc then 
+        print("ERROR:", error)
+    end
+    --end of Command Module
 end)
 
 
