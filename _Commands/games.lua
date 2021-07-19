@@ -24,6 +24,6 @@ local function PlayRPS(message, input)
 end
 
 CMD['pick'] = function(message)
-    local _, arg = parseMsg(message.content, 1)
+    local _, arg = parseMsg(message, 1)
     PlayRPS(message, arg[1])
 end

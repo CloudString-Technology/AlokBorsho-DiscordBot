@@ -3,7 +3,7 @@ CMD["ping"] = function(message)
 end
 
 CMD["quote"] = function(message)
-    local _, arg = parseMsg(message.content, 1)
+    local _, arg = parseMsg(message, 1)
     if tonumber(arg[1]) == nil then 
         message:reply("It must be snowflake ID") return end
     

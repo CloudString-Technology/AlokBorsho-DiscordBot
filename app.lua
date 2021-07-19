@@ -35,7 +35,7 @@ client:on("messageCreate", function(message)
     if not message.guild then return end
 
     --Start of Command Module.
-    local cmd, content = parseMsg(message.content)
+    local cmd, content = parseMsg(message)
     if not CMD[cmd] then return end
     local suc, error = pcall(function() CMD[cmd](message, content) end)
     if not suc then 
