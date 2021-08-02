@@ -1,6 +1,5 @@
-CMD["ping"] = function(message)
-    message:reply("pong")
-end
+local http = require("coro-http")
+local decode = require("json").decode
 
 CMD["quote"] = function(message)
     local _, arg = parseMsg(message, 1)
@@ -27,4 +26,32 @@ CMD["quote"] = function(message)
         }
     }
 end
-
+--Currently only taking image photo, will add more features soon!
+CMD["promeme"] = function(message)
+    ::redo::
+    local uri = "https://www.reddit.com/r/ProgrammerHumor/random/.json"
+    local Suc, Res = http.request("GET", uri)
+    local body = decode(Res)[1].data.children[1]
+    local data = body.data
+    --
+    if data.is_video then
+        goto redo
+    return end
+    message.channel:send{
+        embed = {
+            title = data.title,
+            description = data.selftext,
+            image = {
+                url = data.url_overridden_by_dest
+            },
+            thumbnail = {
+                url = data.thumbnail
+            },
+            author = {
+                name = data.author,
+                url = "https://www.reddit.com"..data.permalink
+            }
+        },
+        reference = { message = message, mention = true}
+    }
+end
