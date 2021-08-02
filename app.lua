@@ -14,7 +14,6 @@ require("./extensions")
 
 
 client:once("ready", function() -- bot is ready
-
     client:setGame("https://alokborsho.win")
     print("Logged in as " .. client.user.username)
 end)
@@ -25,6 +24,7 @@ require("./_Commands/public") --Added public commands
 require("./_Commands/exec") --Execute Lua Code inside Discord
 require("./_Commands/games") --Execute Lua Code inside Discord
 
+--local spamControl = require("./_Commands/spam")
 
 ---@param message Message
 client:on("messageCreate", function(message)
@@ -34,6 +34,7 @@ client:on("messageCreate", function(message)
     if message.author.bot then return end
     if not message.guild then return end
 
+    --spamControl(message.author, client, message)
     --Start of Command Module.
     local cmd, content = parseMsg(message)
     if not CMD[cmd] then return end

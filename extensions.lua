@@ -7,7 +7,6 @@ _G.json = require("json")
 local prefix = '+'
 _G.parseMsg = function(message, num)
 	local content = type(message) ~= string and message.content or message
-	p(content)
 	local num = num or 0
 	local cmd, arg, line
 	local ntable = {}
