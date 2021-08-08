@@ -1,16 +1,29 @@
---Making the whole script inside one single coroutine coro-* works, also async works more easily.
-coroutine.wrap(function() 
+local discord = require("discordia")
 
-    --Error handling
-    local Suc, error = pcall(function()
-        
-        require("./app") -- Require the bot script.
+_G.client = discord.Client{
+    logFile = 'bot.log',
+    cacheAllMembers = true,
+    syncGuilds = true
+} 
 
-    end)
-    if not Suc then
-        print("ERROR:", error)
-    end
-end)()
+_G.dEnum = discord.enums --Loads all type informations here.
+
+discord.extensions() -- load all helpful extensions
 
 
---Do not change anything here!
+require("./extensions")
+
+
+client:once("ready", function() -- bot is ready
+    client:setGame("https://alokborsho.win")
+    print("Logged in as " .. client.user.username)
+end)
+
+
+--local spamControl = require("./_Commands/spam")
+
+
+require("./_Events")
+
+local dToken = require("./token")
+client:run("Bot "..dToken)
