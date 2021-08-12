@@ -2,7 +2,7 @@ local http = require("coro-http")
 local decode = require("json").decode
 
 CMD["quote"] = function(message)
-    local _, arg = parseMsg(message, 1)
+    local _, arg = ext.parseMsg(message, 1)
     if tonumber(arg[1]) == nil then 
         message:reply("It must be snowflake ID") return end
     
@@ -60,7 +60,7 @@ end
 
 CMD["reddit"] = function(message)
     ::redo::
-    local _, arg = parseMsg(message, 1)
+    local _, arg = ext.parseMsg(message, 1)
     local uri = "https://www.reddit.com/r/"..arg[1].."/random/.json"
     local Suc, Res = http.request("GET", uri)
 

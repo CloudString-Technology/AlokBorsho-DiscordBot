@@ -3,9 +3,10 @@ _G.http = require("coro-http")
 _G.fs = require("fs")
 _G.json = require("json")
 
+local ext = {}
 
 local prefix = '+'
-_G.parseMsg = function(message, num)
+ext.parseMsg = function(message, num)
 	local content = type(message) ~= string and message.content or message
 	local num = num or 0
 	local cmd, arg, line
@@ -25,15 +26,20 @@ _G.parseMsg = function(message, num)
 	return cmd or content, arg, line
 end
 
---[[
-local ext = setmetatable({
+ext.anAdmin = function(author)
+	-- body
+end
+
+
+local globaltables = setmetatable({
+	ext = ext
 }, {__call = function(self)
 	for _, v in pairs(self) do
 		v()
 	end
 end})
 
-for n, m in pairs(ext) do
+for n, m in pairs(globaltables) do
 	_G[n] = _G[n] or {}
 	setmetatable(m, {__call = function(self)
 		for k, v in pairs(self) do
@@ -41,5 +47,5 @@ for n, m in pairs(ext) do
 		end
 	end})
 end
-return ext
-]]
+
+return globaltables

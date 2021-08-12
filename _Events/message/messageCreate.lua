@@ -8,7 +8,7 @@ client:on("messageCreate", function(message)
 
     --spamControl(message.author, client, message)
     --Start of Command Module.
-    local cmd, content = parseMsg(message)
+    local cmd, content = ext.parseMsg(message)
     if not CMD[cmd] then return end
     local suc, error = pcall(function() CMD[cmd](message, content) end)
     if not suc then 

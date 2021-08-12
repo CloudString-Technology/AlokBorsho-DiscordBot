@@ -11,7 +11,7 @@ _G.dEnum = discord.enums --Loads all type informations here.
 discord.extensions() -- load all helpful extensions
 
 
-require("./extensions")
+require("./extensions")()
 
 
 client:once("ready", function() -- bot is ready
