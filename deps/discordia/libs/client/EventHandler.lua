@@ -1,6 +1,6 @@
 local enums = require('enums')
 local json = require('json')
-
+local http = require("http")
 local channelType = enums.channelType
 local insert = table.insert
 local null = json.null
