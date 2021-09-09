@@ -95,3 +95,21 @@ CMD["reddit"] = function(message)
         reference = { message = message, mention = true}
     }
 end
+
+CMD["joined"] = function(message)
+    local m = message.guild:getMember(message.mentionedUsers.first and message.mentionedUsers.first.id or message.author.id)
+    local Date = require("discordia").Date
+        message.channel:send{
+            embed = {
+                thumbnail = {url = m.avatarURL},
+                fields = {
+                    {name = 'Name', value = m.nickname and string.format('%s (%s)', m.username, m.nickname) or m.username, inline = true},
+                    {name = 'Discriminator', value = m.discriminator, inline = true},
+                    {name = 'ID', value = m.id, inline = true},
+                    {name = 'Status', value = m.status:gsub('^%l', string.upper), inline = true},
+                    {name = 'Joined Server', value = m.joinedAt and m.joinedAt:gsub('%..*', ''):gsub('T', ' ') or '?', inline = true},
+                    {name = 'Joined Discord', value = Date.fromSnowflake(m.id):toISO(' ', ''), inline = true},
+                }
+            }   
+        }
+end
