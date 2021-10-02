@@ -41,7 +41,7 @@ function Message:_load(data)
 end
 
 local function parseMentions(content, pattern)
-	if not content:find('%b<>') then return end
+	if not content:find('%b<>') then return {} end
 	local mentions, seen = {}, {}
 	for id in content:gmatch(pattern) do
 		if not seen[id] then
@@ -388,13 +388,15 @@ function get.mentionedUsers(self)
 	if not self._mentioned_users then
 		local users = self.client._users
 		local mentions = parseMentions(self._content, '<@!?(%d+)>')
+		if self._reply_target then
+			insert(mentions, 1, self._reply_target)
+		end
 		self._mentioned_users = ArrayIterable(mentions, function(id)
 			return users:get(id)
 		end)
 	end
 	return self._mentioned_users
 end
-
 
 --[=[@p mentionedRoles ArrayIterable An iterable array of known roles that are mentioned in this message, excluding
 the default everyone role. The message must be in a guild text channel and the
