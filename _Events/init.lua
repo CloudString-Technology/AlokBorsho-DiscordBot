@@ -58,3 +58,11 @@ require("./role")
 	voiceChannelLeave(member, channel) [Once a member leave GuildVoiceChannel]
 ]]
 require('./voice')
+
+
+
+
+
+
+---Added all interactions
+require('./interactions')
