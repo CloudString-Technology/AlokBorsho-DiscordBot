@@ -1,4 +1,6 @@
 
 
 
-require("./messageCreate")
+require("./interactionCreate")
+
+require("./slashCommand")
